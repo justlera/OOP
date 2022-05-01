@@ -3,21 +3,23 @@
 #include <vector>
 #include <limits>
 #include <list>
-#include "library.cpp"
+#include <cassert>
+#include "library.h"
 
 //создать объект класса library, добавить туда 2-3 книги разных типов
 //удалить одну из них, попытаться удалить отсутствующую в библиотеке книгу
 //вывести то, что осталось
 
-void testlibrary(){
+void test_library(){
     Library library;
 
-    Book: PBook p1("Harry Potter", "J.K. Rowling", 13, 300, 8, 5);
+    PBook p1("Harry Potter", "J.K. Rowling", 13, 300, 8, 5);
     PBook p2("Twilight", "Stephenie Meyer", 20, 500, 10, 3);
 
     Ebook e1("Gospel", "Luca", 23, 100, 99);
     Ebook e2("Dune", "Frank Herbert", 1000, 800, 70);
 
+    /*
     assert(library.Add(&p1));
     assert(library.Add(&p2));
     assert(library.Add(&e1));
@@ -28,9 +30,21 @@ void testlibrary(){
 
     int x = library.Count();
     assert(library.Show(x));
+    */
+    library.Add(&p1);
+    library.Add(&p2);
+    library.Add(&e1);
+    library.Add(&e2);
+
+    library.Del(&e2);
+    //library.Del(&p3);
+
+    int x = library.Count();
+    library.Show(x);
+
 }
 
 int main() {
-    testlibrary();
+    test_library();
     return 0;
 }
