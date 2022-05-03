@@ -21,20 +21,17 @@ public:
 
     Book(const string& name, const string& author, int date)
             : name(name), author(author), date(date) {}
-    //virtual ~Book();
-    Book *clone(){
-        return nullptr;
-    };
+    virtual Book *clone() const = 0;
     //int GetID() { return id; }
     virtual string getname() const { return name;}
     virtual string getauthor() const { return author;}
+    //virtual string getall() const {return *this; }
 
-
+    virtual ~Book() {};
 };
 
 class PBook : public Book {
 private:
-    //PBook(const string *pString) const;
     int pages;
     int mark;
     int state;
@@ -57,7 +54,7 @@ public:
 
 };
 
-class Ebook:public Book {
+class Ebook : public Book {
 private:
     int volume;
     //std::vector<int> dates;
@@ -77,7 +74,7 @@ public:
 
     Ebook(const string& name, const string& author, int volume, int date, int mark)
             : Book(name, author, date), volume(volume), mark(mark) {}
-
+    Book *clone() const;
 };
 
 struct Node{
@@ -92,15 +89,14 @@ public:
     Library():Head(NULL),Tail(NULL),size(0){};                       //Инициализация элементов в ноль с помощью конструктора
     ~Library();                                                       //Прототип деструктор: в деструкторе освободим память
     void Add(Book *pb);                                              //Прототип функции добавления элементов в списов
-    void Show(int temp);                                         //Прототип функции отображения элементов списка
+    void Show();                                         //Прототип функции отображения элементов списка
     int Count();                                                  //Прототип функции возвращающей число элементов в списке
     void Del(Book *pb);
-    Book *clone();
 };
 
 /*void Add(Book *pb);
 void Count();
 void Del(Book *pb);
-void Show(int temp);*/
+void Show();*/
 
 #endif // LIBRARY_H
