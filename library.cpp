@@ -5,6 +5,8 @@
 #include <list>
 #include "library.h"
 
+//Book::~Book() {}
+
 Library::~Library()
 {
     while (size != 0)                        //Пока размерность списка не станет нулевой
@@ -24,15 +26,9 @@ Book* PBook::clone() const {
     return new PBook(*this);
 }
 
-/*string Book::getname() const
-{
-    return this->name;
+Book* Ebook::clone() const {
+    return new Ebook(*this);
 }
-
-string Book::getauthor() const
-{
-    return this->author;
-}*/
 
 void Library::Add(Book *pb)
 {
@@ -55,31 +51,38 @@ void Library::Del(Book *pb)
     if (Head == NULL) { cout << "\nСписок пуст\n\n"; }
     /*if (Head == Head->Next)
     {
+        delete Head->pBook;
         delete Head;
         Head = NULL;
     }*/
     else{
         Node* temp = Head;
-        while (temp->Next->pBook->getname() == pb->getname() && temp->Next->pBook->getauthor() == pb->getauthor()){
+        Node* temphead = Head;
+        int flag = 0;
+        while (temp->Next!=temphead && temp->Next->pBook->getname() == pb->getname() && temp->Next->pBook->getauthor() == pb->getauthor()){
             temp = temp->Next;
+            flag = 1;
         }
-        Node* t2 = temp->Next->Next; // сохраняем указатель Next удаляемого элемента
-        delete temp->Next->pBook; // удаляем книгу; надо использовать delete
-        // вместо free, если память выделялась new
-        delete temp->Next; // удаляем хранивший книгу элемент списка
-        temp->Next = t2->Next; // восстанавливаем целостность списка
-        size--;
+        if (flag == 1){
+            Node* t2 = temp->Next->Next; // сохраняем указатель Next удаляемого элемента
+            delete temp->Next->pBook; // удаляем книгу; надо использовать delete
+            // вместо free, если память выделялась new
+            delete temp->Next; // удаляем хранивший книгу элемент списка
+            temp->Next = t2; // восстанавливаем целостность списка
+            size--;
+        }
 
     }
 }
 
-void Library::Show(int temp)
+void Library::Show()
 {
     Node *tempHead = Head;                  //Указываем на голову
-    temp = size;                            //Временная переменная равная числу элементов в списке
+    int temp = size;                            //Временная переменная равная числу элементов в списке
     while (temp != 0)                        //Пока не выполнен признак прохода по всему списку
-    {
-        cout << tempHead->pBook << " ";           //Очередной элемент списка на экран
+   {
+        cout << tempHead->pBook->getname() << " ";           //Очередной элемент списка на экран
+        cout << tempHead->pBook->getauthor() << "\n";
         tempHead = tempHead->Next;            //Указываем, что нужен следующий элемент
         temp--;                               //Один элемент считан, значит осталось на один меньше
     }
