@@ -15,6 +15,7 @@ void test_library(){
 
     PBook p1("Harry Potter", "J.K. Rowling", 13, 300, 8, 5);
     PBook p2("Twilight", "Stephenie Meyer", 20, 500, 10, 3);
+    PBook p3("Sherlock Holmes", "A.C. Doyle", 15, 555, 10, 10);
 
     Ebook e1("Gospel", "Luca", 23, 100, 99);
     Ebook e2("Dune", "Frank Herbert", 1000, 800, 70);
@@ -37,10 +38,10 @@ void test_library(){
     library.Add(&e2);
 
     library.Del(&e2);
-    //library.Del(&p3);
+    library.Del(&p3);
 
     int x = library.Count();
-    library.Show(x);
+    library.Show();
 
 }
 
