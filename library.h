@@ -12,18 +12,29 @@ using namespace std;
 
 class Book{
 private:
-    string name;
-    string author;
     int date;
 public:
+    int id;
+    string name;
+    string author;
     virtual bool set_mark(int mark) = 0;
 
     Book(const string& name, const string& author, int date)
             : name(name), author(author), date(date) {}
+    //virtual ~Book();
+    Book *clone(){
+        return nullptr;
+    };
+    //int GetID() { return id; }
+    virtual string getname() const { return name;}
+    virtual string getauthor() const { return author;}
+
+
 };
 
 class PBook : public Book {
 private:
+    //PBook(const string *pString) const;
     int pages;
     int mark;
     int state;
@@ -41,6 +52,8 @@ public:
 
     PBook(const string& name, const string& author, int date, int pages, int mark, int state)
             : Book(name, author, date), pages(pages), mark(mark), state(state) {}
+
+    Book *clone() const;
 
 };
 
@@ -82,6 +95,7 @@ public:
     void Show(int temp);                                         //Прототип функции отображения элементов списка
     int Count();                                                  //Прототип функции возвращающей число элементов в списке
     void Del(Book *pb);
+    Book *clone();
 };
 
 /*void Add(Book *pb);
