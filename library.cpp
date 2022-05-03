@@ -20,12 +20,27 @@ int Library::Count(){
     return size;                             //Возвращаем число элементов списка
 }
 
+Book* PBook::clone() const {
+    return new PBook(*this);
+}
+
+/*string Book::getname() const
+{
+    return this->name;
+}
+
+string Book::getauthor() const
+{
+    return this->author;
+}*/
+
 void Library::Add(Book *pb)
 {
     size++;                                    //При каждом добавлении элемента увеличиваем число элементов в списке
     Node  *temp = new Node;                    //Выделение памяти для нового элемента списка
     temp->Next = Head;                         //Замыкание контура. Последний элемент - это начало списка
-    temp->pBook = pb;                          //Записываем в выделенную ячейку памяти значение pb
+    temp->pBook = pb->clone();                 //Снимаем копию с pb
+    //temp->pBook->id = size;
 
     if (Head != NULL)                       //В том случае если список не пустой
     {
@@ -45,7 +60,7 @@ void Library::Del(Book *pb)
     }*/
     else{
         Node* temp = Head;
-        while (temp->Next && temp->Next->pBook != pb){
+        while (temp->Next->pBook->getname() == pb->getname() && temp->Next->pBook->getauthor() == pb->getauthor()){
             temp = temp->Next;
         }
         Node* t2 = temp->Next->Next; // сохраняем указатель Next удаляемого элемента
