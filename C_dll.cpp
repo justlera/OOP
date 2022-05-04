@@ -3,11 +3,11 @@
 #include "library.h"
 
 extern "C"{
-    Book* create_pbook(string name, string author, int date, int pages, int mark, int state){
+    Book* create_pbook(char* name, char* author, int date, int pages, int mark, int state){
         return new PBook(name, author, date, pages, mark, state);
     }
 
-    Book* create_ebook(string name, string author, int volume, int date, int mark){
+    Book* create_ebook(char* name, char* author, int volume, int date, int mark){
         return new Ebook(name, author, volume, date, mark);
     }
 
