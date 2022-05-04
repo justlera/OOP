@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 project(untitled)
 
-add_library(shared SHARED C_dll.cpp) # compile "C_dll.cpp" and create a SHARED library called "shared"
+add_library(shared SHARED library.cpp C_dll.cpp) # compile "C_dll.cpp" and create a SHARED library called "shared"
 set(CMAKE_CXX_STANDARD 17)
 add_executable(main library.cpp test.cpp C_dll.cpp)
 
@@ -12,3 +12,4 @@ GENERATE_EXPORT_HEADER(shared           # generates the export header shared_EXP
         EXPORT_FILE_NAME shared_EXPORTS.h
         STATIC_DEFINE SHARED_EXPORTS_BUILT_AS_STATIC)
 target_link_libraries(main shared)      # link our previously created shared library "shared" to the exectable "main"
+
