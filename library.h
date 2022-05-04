@@ -25,8 +25,6 @@ public:
     //int GetID() { return id; }
     virtual string getname() const { return name;}
     virtual string getauthor() const { return author;}
-    //virtual string getall() const {return *this; }
-
     virtual ~Book() {};
 };
 
@@ -51,6 +49,7 @@ public:
             : Book(name, author, date), pages(pages), mark(mark), state(state) {}
 
     Book *clone() const;
+    virtual ~PBook(){ }
 
 };
 
@@ -75,6 +74,7 @@ public:
     Ebook(const string& name, const string& author, int volume, int date, int mark)
             : Book(name, author, date), volume(volume), mark(mark) {}
     Book *clone() const;
+    virtual ~Ebook(){ }
 };
 
 struct Node{
@@ -86,12 +86,12 @@ class Library{
     Node *Head, *Tail;                                            //Первый элемент и тот что последний
     int size;                                                     //Число элементов в списке
 public:
-    Library(Node *pNode, Node *pNode1, int i) : Head(NULL), Tail(NULL), size(0){};                       //Инициализация элементов в ноль с помощью конструктора
-    ~Library();                                                       //Прототип деструктор: в деструкторе освободим память
+    Library(Node *Head, Node *Tail, int size) : Head(NULL), Tail(NULL), size(0) {} //Инициализация элементов в ноль с помощью конструктора
     void Add(Book *pb);                                              //Прототип функции добавления элементов в списов
     void Show();                                         //Прототип функции отображения элементов списка
     int Count();                                                  //Прототип функции возвращающей число элементов в списке
     void Del(Book *pb);
+    virtual ~Library() {};                                           //Прототип деструктор: в деструкторе освободим память
 };
 
 #endif // LIBRARY_H
