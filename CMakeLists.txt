@@ -3,7 +3,7 @@ project(untitled)
 
 add_library(shared SHARED library.cpp C_dll.cpp) # compile "C_dll.cpp" and create a SHARED library called "shared"
 set(CMAKE_CXX_STANDARD 17)
-add_executable(main library.cpp test.cpp C_dll.cpp)
+add_executable(main library.cpp C_dll.cpp)
 
 include (GenerateExportHeader)
 GENERATE_EXPORT_HEADER(shared           # generates the export header shared_EXPORTS.h automatically
