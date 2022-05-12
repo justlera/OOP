@@ -1,9 +1,9 @@
 import ctypes
 
-lib_book = ctypes.CDLL('C:/Users/iamle/CLionProjects/untitled4/libshared.dll', winmode=1)
+lib_book = ctypes.CDLL('./libshared.dll')
 
 #create_pbook = lib_book.create_pbook
-lib_book.create_library.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int]
+lib_book.create_library.argtypes = []
 lib_book.create_library.restype = ctypes.c_void_p
 
 lib_book.create_pbook.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int, ctypes.c_int, ctypes.c_int,
@@ -11,12 +11,16 @@ lib_book.create_pbook.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int
 lib_book.create_pbook.restype = ctypes.c_void_p
 lib_book.create_ebook.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int, ctypes.c_int, ctypes.c_int]
 lib_book.create_ebook.restype = ctypes.c_void_p
+
 lib_book.add_book.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
 lib_book.add_book.restype = ctypes.c_void_p
+
 lib_book.show_library.argtypes = [ctypes.c_void_p]
 lib_book.show_library.restype = ctypes.c_void_p
+
 lib_book.count_size.argtypes = [ctypes.c_void_p]
 lib_book.count_size.restype = ctypes.c_void_p
+
 lib_book.delete_book.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_void_p]
 lib_book.delete_book.restype = ctypes.c_void_p
 
@@ -26,7 +30,7 @@ lib_book.author.argtypes = [ctypes.c_void_p, ctypes.c_char_p, ctypes.c_int]
 lib_book.author.restype = ctypes.c_void_p
 
 operation = '0'
-lp = lib_book.create_library(head, tail, 0)
+lp = lib_book.create_library()
 
 def add_book():
     flag = 1
