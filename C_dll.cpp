@@ -11,8 +11,8 @@ extern "C"{
         return new Ebook(name, author, volume, date, mark);
     }
 
-    Library* create_library(Node* Head, Node* Tail, int size) {
-        return new Library(Head, Tail, size);
+    Library* create_library() {
+        return new Library(nullptr, nullptr, 0);
     }
 
     void name(Book* pb, char* name, int max_name_len){
